@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fitness Progress Tracker</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        darkbg: '#121212',
+                        cardbg: '#1e1e1e',
+                        accentgreen: '#22c55e'
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-darkbg text-gray-100 font-sans min-h-screen flex">
+
+    <!-- Sidebar Navigation -->
+    <aside class="w-64 bg-black/40 border-r border-gray-800 flex flex-col justify-between p-4 hidden md:flex">
+        <div>
+            <div class="flex items-center space-x-2 mb-8 px-2">
+                <div class="bg-accentgreen p-2 rounded-lg text-black font-bold">⚡</div>
+                <div>
+                    <h1 class="font-bold text-sm leading-tight">Fitness Progress...</h1>
+                    <span class="text-xs text-gray-400">FITNESS TRACKER</span>
+                </div>
+            </div>
+
+            <nav class="space-y-1">
+                <button onclick="switchTab('dashboard')" id="nav-dashboard" class="w-full flex items-center space-x-3 px-4 py-2.5 rounded-lg bg-accentgreen text-black font-medium transition">
+                    <span>📊</span><span>Dashboard</span>
+                </button>
+                <button onclick="switchTab('workouts')" id="nav-workouts" class="w-full flex items-center space-x-3 px-4 py-2.5 rounded-lg text-gray-400 hover:bg-gray-800 hover:text-white transition">
+                    <span>🏋️</span><span>Workouts</span>
+                </button>
+                <button onclick="switchTab('nutrition')" id="nav-nutrition" class="w-full flex items-center space-x-3 px-4 py-2.5 rounded-lg text-gray-400 hover:bg-gray-800 hover:text-white transition">
+                    <span>🥗</span><span>Nutrition</span>
+                </button>
+                <button onclick="switchTab('metrics')" id="nav-metrics" class="w-full flex items-center space-x-3 px-4 py-2.5 rounded-lg text-gray-400 hover:bg-gray-800 hover:text-white transition">
+                    <span>📈</span><span>Body Metrics</span>
+                </button>
+            </nav>
+        </div>
+
+        <!-- User Profile Card -->
+        <div class="bg-cardbg p-3 rounded-xl border border-gray-800">
+            <div class="flex items-center space-x-3">
+                <div class="w-10 h-10 rounded-full bg-amber-500 flex items-center justify-center font-bold text-black">F</div>
+                <div>
+                    <p class="font-semibold text-sm">Francis</p>
+                    <p class="text-xs text-gray-400">Fitness tracker</p>
+                </div>
+            </div>
+            <p class="text-xs text-amber-400 mt-2">● Metric units (kg / km / cm)</p>
+        </div>
+    </aside>
+
+    <!-- Main Content Area -->
+    <main class="flex-1 flex flex-col h-screen overflow-y-auto">
+        
+        <!-- Top Header -->
+        <header class="flex justify-between items-center px-8 py-6 border-b border-gray-800 bg-black/20">
+            <h2 class="text-xl font-semibold tracking-wide">Fitness Progress Tracker</h2>
+            <div class="flex items-center space-x-4">
+                <span class="text-sm text-gray-400">Thursday, October 15</span>
+                <button onclick="openLogModal()" class="bg-accentgreen hover:bg-green-600 text-black font-medium px-4 py-2 rounded-lg text-sm transition shadow-lg">
+                    + Log workout
+                </button>
+            </div>
+        </header>
+
+        <!-- Dynamic Views -->
+        <div class="p-8 flex-1">
+            
+            <!-- DASHBOARD TAB -->
+            <div id="tab-dashboard" class="space-y-6">
+                <div class="mb-6">
+                    <h3 class="text-3xl font-bold">Good afternoon, Francis</h3>
+                    <p class="text-gray-400">Here is your fitness progress at a glance.</p>
+                </div>
+                
+                <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+                    <div class="bg-cardbg p-6 rounded-2xl border border-gray-800 h-32"></div>
+                    <div class="bg-cardbg p-6 rounded-2xl border border-gray-800 h-32"></div>
+                    <div class="bg-cardbg p-6 rounded-2xl border border-gray-800 h-32"></div>
+                    <div class="bg-cardbg p-6 rounded-2xl border border-gray-800 h-32"></div>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div class="bg-cardbg p-6 rounded-2xl border border-gray-800 h-64 md:col-span-2"></div>
+                    <div class="bg-cardbg p-6 rounded-2xl border border-gray-800 h-64"></div>
+                </div>
+            </div>
+
+            <!-- WORKOUTS TAB (CRUD Section) -->
+            <div id="tab-workouts" class="hidden space-y-6">
+                <div class="flex justify-between items-center">
+                    <div>
+                        <h3 class="text-3xl font-bold">Workouts</h3>
+                        <p class="text-gray-400">Log training sessions and review your full workout history.</p>
+                    </div>
+                </div>
+
+                <!-- Workout list will populate here dynamically via JavaScript -->
+                <div id="workout-list" class="space-y-4">
+                    <!-- Sample items matching your screenshot -->
+                </div>
+            </div>
+
+            <!-- NUTRITION TAB -->
+            <div id="tab-nutrition" class="hidden space-y-6">
+                <h3 class="text-3xl font-bold">Nutrition</h3>
+                <p class="text-gray-400">Track meals by date with calories and macronutrients.</p>
+            </div>
+
+            <!-- BODY METRICS TAB -->
+            <div id="tab-metrics" class="hidden space-y-6">
+                <h3 class="text-3xl font-bold">Body Metrics</h3>
+                <p class="text-gray-400">Track weight, body composition and measurements over time.</p>
+            </div>
+
+        </div>
+    </main>
+
+    <script src="app.js"></script>
+</body>
+</html>
