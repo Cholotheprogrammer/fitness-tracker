@@ -3,8 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Fitness Progress Tracker</title>
-    <!-- Tailwind CSS CDN -->
+    <title>Momentum Fit Studio</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
@@ -12,123 +11,367 @@
             theme: {
                 extend: {
                     colors: {
-                        darkbg: '#121212',
-                        cardbg: '#1e1e1e',
-                        accentgreen: '#22c55e'
+                        darkbg: '#0f172a',
+                        cardbg: '#111827',
+                        accentgreen: '#34d399',
+                        accentblue: '#38bdf8'
                     }
                 }
             }
         }
     </script>
 </head>
-<body class="bg-darkbg text-gray-100 font-sans min-h-screen flex">
+<body class="bg-slate-950 text-slate-100 font-sans antialiased">
 
-    <!-- Sidebar Navigation -->
-    <aside class="w-64 bg-black/40 border-r border-gray-800 flex flex-col justify-between p-4 hidden md:flex">
-        <div>
-            <div class="flex items-center space-x-2 mb-8 px-2">
-                <div class="bg-accentgreen p-2 rounded-lg text-black font-bold">⚡</div>
+    <section id="landing-page" class="min-h-screen bg-gradient-to-b from-slate-950 via-slate-900 to-slate-950">
+        <nav class="mx-auto flex max-w-7xl items-center justify-between px-6 py-5">
+            <div class="flex items-center gap-3">
+                <div class="flex h-10 w-10 items-center justify-center rounded-xl bg-accentgreen text-lg font-black text-slate-900">M</div>
                 <div>
-                    <h1 class="font-bold text-sm leading-tight">Fitness Progress...</h1>
-                    <span class="text-xs text-gray-400">FITNESS TRACKER</span>
+                    <p class="text-lg font-bold">Momentum Fit Studio</p>
+                    <p class="text-xs uppercase tracking-[0.2em] text-slate-400">Strength • Recovery • Results</p>
+                </div>
+            </div>
+            <div class="hidden items-center gap-6 md:flex">
+                <a href="#about" class="text-slate-300 hover:text-white">About</a>
+                <a href="#services" class="text-slate-300 hover:text-white">Services</a>
+                <a href="#pricing" class="text-slate-300 hover:text-white">Plans</a>
+            </div>
+            <div class="flex items-center gap-3">
+                <button id="landing-login" type="button" class="rounded-lg border border-slate-700 px-4 py-2 text-sm font-medium text-slate-200 hover:border-slate-500">Login</button>
+                <button id="landing-register" type="button" class="rounded-lg bg-accentgreen px-4 py-2 text-sm font-semibold text-slate-900 hover:bg-emerald-300">Register</button>
+            </div>
+        </nav>
+
+        <header class="mx-auto grid max-w-7xl items-center gap-10 px-6 py-16 md:grid-cols-2 md:py-24">
+            <div>
+                <span class="inline-flex rounded-full border border-emerald-500/40 bg-emerald-500/10 px-3 py-1 text-xs font-medium uppercase tracking-[0.2em] text-emerald-300">Built for real progress</span>
+                <h1 class="mt-6 text-4xl font-black tracking-tight text-white md:text-6xl">A smarter way to run your fitness coaching business.</h1>
+                <p class="mt-5 max-w-xl text-lg text-slate-300">Momentum Fit Studio helps trainers manage memberships, log workouts, track nutrition, and support client progress in one organized place.</p>
+                <div class="mt-8 flex flex-wrap gap-4">
+                    <button id="hero-login" type="button" class="rounded-xl bg-accentgreen px-6 py-3 font-semibold text-slate-900 hover:bg-emerald-300">Login to your account</button>
+                    <button id="hero-register" type="button" class="rounded-xl border border-slate-700 bg-slate-900 px-6 py-3 font-semibold text-white hover:border-slate-500">Create a free account</button>
+                </div>
+                <div class="mt-8 flex items-center gap-8 text-sm text-slate-300">
+                    <span>1,200+ active members</span>
+                    <span>4.9/5 client rating</span>
                 </div>
             </div>
 
-            <nav class="space-y-1">
-                <button onclick="switchTab('dashboard')" id="nav-dashboard" class="w-full flex items-center space-x-3 px-4 py-2.5 rounded-lg bg-accentgreen text-black font-medium transition">
-                    <span>📊</span><span>Dashboard</span>
-                </button>
-                <button onclick="switchTab('workouts')" id="nav-workouts" class="w-full flex items-center space-x-3 px-4 py-2.5 rounded-lg text-gray-400 hover:bg-gray-800 hover:text-white transition">
-                    <span>🏋️</span><span>Workouts</span>
-                </button>
-                <button onclick="switchTab('nutrition')" id="nav-nutrition" class="w-full flex items-center space-x-3 px-4 py-2.5 rounded-lg text-gray-400 hover:bg-gray-800 hover:text-white transition">
-                    <span>🥗</span><span>Nutrition</span>
-                </button>
-                <button onclick="switchTab('metrics')" id="nav-metrics" class="w-full flex items-center space-x-3 px-4 py-2.5 rounded-lg text-gray-400 hover:bg-gray-800 hover:text-white transition">
-                    <span>📈</span><span>Body Metrics</span>
-                </button>
-            </nav>
-        </div>
-
-        <!-- User Profile Card -->
-        <div class="bg-cardbg p-3 rounded-xl border border-gray-800">
-            <div class="flex items-center space-x-3">
-                <div class="w-10 h-10 rounded-full bg-amber-500 flex items-center justify-center font-bold text-black">F</div>
-                <div>
-                    <p class="font-semibold text-sm">Francis</p>
-                    <p class="text-xs text-gray-400">Fitness tracker</p>
-                </div>
-            </div>
-            <p class="text-xs text-amber-400 mt-2">● Metric units (kg / km / cm)</p>
-        </div>
-    </aside>
-
-    <!-- Main Content Area -->
-    <main class="flex-1 flex flex-col h-screen overflow-y-auto">
-        
-        <!-- Top Header -->
-        <header class="flex justify-between items-center px-8 py-6 border-b border-gray-800 bg-black/20">
-            <h2 class="text-xl font-semibold tracking-wide">Fitness Progress Tracker</h2>
-            <div class="flex items-center space-x-4">
-                <span class="text-sm text-gray-400">Thursday, October 15</span>
-                <button onclick="openLogModal()" class="bg-accentgreen hover:bg-green-600 text-black font-medium px-4 py-2 rounded-lg text-sm transition shadow-lg">
-                    + Log workout
-                </button>
+            <div class="overflow-hidden rounded-3xl border border-slate-800 bg-slate-900 shadow-2xl shadow-emerald-500/10">
+                <img src="https://images.unsplash.com/photo-1517836357463-d25dfeac3438?auto=format&fit=crop&w=1200&q=80" alt="Fitness coaching session" class="h-full w-full object-cover">
             </div>
         </header>
 
-        <!-- Dynamic Views -->
-        <div class="p-8 flex-1">
-            
-            <!-- DASHBOARD TAB -->
-            <div id="tab-dashboard" class="space-y-6">
-                <div class="mb-6">
-                    <h3 class="text-3xl font-bold">Good afternoon, Francis</h3>
-                    <p class="text-gray-400">Here is your fitness progress at a glance.</p>
+        <main>
+            <section id="about" class="mx-auto max-w-7xl px-6 py-12">
+                <div class="mb-8 text-center">
+                    <p class="text-sm font-semibold uppercase tracking-[0.2em] text-emerald-300">Why Momentum</p>
+                    <h2 class="mt-3 text-3xl font-bold text-white">Everything your studio needs in one workflow</h2>
                 </div>
-                
-                <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
-                    <div class="bg-cardbg p-6 rounded-2xl border border-gray-800 h-32"></div>
-                    <div class="bg-cardbg p-6 rounded-2xl border border-gray-800 h-32"></div>
-                    <div class="bg-cardbg p-6 rounded-2xl border border-gray-800 h-32"></div>
-                    <div class="bg-cardbg p-6 rounded-2xl border border-gray-800 h-32"></div>
+                <div class="grid gap-6 md:grid-cols-3">
+                    <div class="rounded-2xl border border-slate-800 bg-slate-900/80 p-6">
+                        <div class="mb-4 text-2xl">🏋️</div>
+                        <h3 class="text-xl font-semibold">Workout tracking</h3>
+                        <p class="mt-2 text-slate-300">Log sessions, monitor intensity, and keep each client moving toward their targets.</p>
+                    </div>
+                    <div class="rounded-2xl border border-slate-800 bg-slate-900/80 p-6">
+                        <div class="mb-4 text-2xl">🥗</div>
+                        <h3 class="text-xl font-semibold">Nutrition planning</h3>
+                        <p class="mt-2 text-slate-300">Track meals and macros so members stay consistent between training days.</p>
+                    </div>
+                    <div class="rounded-2xl border border-slate-800 bg-slate-900/80 p-6">
+                        <div class="mb-4 text-2xl">📈</div>
+                        <h3 class="text-xl font-semibold">Progress review</h3>
+                        <p class="mt-2 text-slate-300">Review body metrics and weekly milestones to celebrate wins and adjust plans.</p>
+                    </div>
                 </div>
+            </section>
 
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                    <div class="bg-cardbg p-6 rounded-2xl border border-gray-800 h-64 md:col-span-2"></div>
-                    <div class="bg-cardbg p-6 rounded-2xl border border-gray-800 h-64"></div>
+            <section id="services" class="mx-auto max-w-7xl px-6 py-12">
+                <div class="mb-8 text-center">
+                    <p class="text-sm font-semibold uppercase tracking-[0.2em] text-emerald-300">Popular programs</p>
+                    <h2 class="mt-3 text-3xl font-bold text-white">Choose the right fitness path</h2>
                 </div>
+                <div class="grid gap-6 md:grid-cols-3">
+                    <div class="rounded-2xl border border-slate-800 bg-slate-900 p-6">
+                        <p class="text-sm uppercase tracking-[0.2em] text-sky-300">Strength</p>
+                        <h3 class="mt-4 text-2xl font-bold">Power Coaching</h3>
+                        <p class="mt-3 text-slate-300">Progressive lifting plans for members who want size, energy, and confidence.</p>
+                        <p class="mt-6 text-3xl font-black text-white">$69<span class="text-base text-slate-400">/mo</span></p>
+                    </div>
+                    <div class="rounded-2xl border border-emerald-500/40 bg-emerald-500/10 p-6">
+                        <p class="text-sm uppercase tracking-[0.2em] text-emerald-300">Best seller</p>
+                        <h3 class="mt-4 text-2xl font-bold">Transformation</h3>
+                        <p class="mt-3 text-slate-200">A full program combining strength, cardio, meal guidance, and accountability.</p>
+                        <p class="mt-6 text-3xl font-black text-white">$99<span class="text-base text-slate-300">/mo</span></p>
+                    </div>
+                    <div class="rounded-2xl border border-slate-800 bg-slate-900 p-6">
+                        <p class="text-sm uppercase tracking-[0.2em] text-violet-300">Recovery</p>
+                        <h3 class="mt-4 text-2xl font-bold">Mobility + Recovery</h3>
+                        <p class="mt-3 text-slate-300">Focused sessions for movement quality, posture, and sustainable training.</p>
+                        <p class="mt-6 text-3xl font-black text-white">$59<span class="text-base text-slate-400">/mo</span></p>
+                    </div>
+                </div>
+            </section>
+
+            <section id="pricing" class="mx-auto max-w-4xl px-6 py-12">
+                <div class="rounded-3xl border border-slate-800 bg-slate-900 p-8 text-center md:p-12">
+                    <p class="text-sm font-semibold uppercase tracking-[0.2em] text-emerald-300">Start today</p>
+                    <h2 class="mt-4 text-3xl font-black text-white">Turn your studio into a results-driven system.</h2>
+                    <p class="mt-5 text-slate-300">Manage training, track progress, and keep high-touch service for every member.</p>
+                    <button id="cta-register" type="button" class="mt-8 rounded-xl bg-accentgreen px-6 py-3 font-semibold text-slate-900 hover:bg-emerald-300">Book a free consultation</button>
+                </div>
+            </section>
+        </main>
+    </section>
+
+    <section id="auth-section" class="hidden min-h-screen items-center justify-center bg-slate-950 px-6 py-12">
+        <div class="w-full max-w-md rounded-3xl border border-slate-800 bg-slate-900 p-8 shadow-2xl shadow-slate-950/80">
+            <div class="mb-6 flex rounded-xl border border-slate-800 bg-slate-950 p-1 text-sm">
+                <button id="show-login-tab" type="button" class="flex-1 rounded-lg bg-accentgreen px-3 py-2 font-semibold text-slate-900">Login</button>
+                <button id="show-register-tab" type="button" class="flex-1 rounded-lg px-3 py-2 font-semibold text-slate-300">Register</button>
             </div>
 
-            <!-- WORKOUTS TAB (CRUD Section) -->
-            <div id="tab-workouts" class="hidden space-y-6">
-                <div class="flex justify-between items-center">
+            <div id="auth-message" class="mb-4 hidden rounded-lg border border-emerald-500/30 bg-emerald-500/10 px-3 py-2 text-sm text-emerald-200"></div>
+
+            <div id="login-panel" class="space-y-4">
+                <h2 class="text-2xl font-bold text-white">Welcome back</h2>
+                <form id="login-form" class="space-y-4">
                     <div>
-                        <h3 class="text-3xl font-bold">Workouts</h3>
-                        <p class="text-gray-400">Log training sessions and review your full workout history.</p>
+                        <label for="login-email" class="mb-1 block text-sm text-slate-300">Email</label>
+                        <input id="login-email" type="email" required class="w-full rounded-xl border border-slate-700 bg-slate-950 px-3 py-2.5 text-white outline-none ring-0 placeholder:text-slate-500 focus:border-emerald-500" placeholder="name@example.com">
+                    </div>
+                    <div>
+                        <label for="login-password" class="mb-1 block text-sm text-slate-300">Password</label>
+                        <input id="login-password" type="password" required class="w-full rounded-xl border border-slate-700 bg-slate-950 px-3 py-2.5 text-white outline-none ring-0 placeholder:text-slate-500 focus:border-emerald-500" placeholder="••••••••">
+                    </div>
+                    <button type="submit" class="w-full rounded-xl bg-accentgreen px-4 py-3 font-semibold text-slate-900 hover:bg-emerald-300">Login</button>
+                </form>
+            </div>
+
+            <div id="register-panel" class="hidden space-y-4">
+                <h2 class="text-2xl font-bold text-white">Create account</h2>
+                <form id="register-form" class="space-y-4">
+                    <div>
+                        <label for="register-name" class="mb-1 block text-sm text-slate-300">Full name</label>
+                        <input id="register-name" type="text" required class="w-full rounded-xl border border-slate-700 bg-slate-950 px-3 py-2.5 text-white outline-none placeholder:text-slate-500 focus:border-emerald-500" placeholder="Jane Smith">
+                    </div>
+                    <div>
+                        <label for="register-email" class="mb-1 block text-sm text-slate-300">Email</label>
+                        <input id="register-email" type="email" required class="w-full rounded-xl border border-slate-700 bg-slate-950 px-3 py-2.5 text-white outline-none placeholder:text-slate-500 focus:border-emerald-500" placeholder="name@example.com">
+                    </div>
+                    <div>
+                        <label for="register-password" class="mb-1 block text-sm text-slate-300">Password</label>
+                        <input id="register-password" type="password" required class="w-full rounded-xl border border-slate-700 bg-slate-950 px-3 py-2.5 text-white outline-none placeholder:text-slate-500 focus:border-emerald-500" placeholder="At least 6 characters">
+                    </div>
+                    <button type="submit" class="w-full rounded-xl bg-accentgreen px-4 py-3 font-semibold text-slate-900 hover:bg-emerald-300">Register</button>
+                </form>
+            </div>
+
+            <div class="mt-5 text-center text-sm text-slate-400">
+                <p>Demo member: member@momentumfit.com / member123</p>
+                <button id="use-demo-account" type="button" class="mt-3 text-sm font-semibold text-emerald-300 underline decoration-emerald-500/50 underline-offset-4 hover:text-emerald-200">Use demo account</button>
+            </div>
+        </div>
+    </section>
+
+    <div id="app-shell" class="hidden min-h-screen bg-slate-950 text-slate-100">
+        <aside class="hidden w-64 flex-col justify-between border-r border-slate-800 bg-slate-900/80 p-4 md:flex">
+            <div>
+                <div class="mb-8 flex items-center gap-3 px-2">
+                    <div class="flex h-10 w-10 items-center justify-center rounded-xl bg-accentgreen text-lg font-black text-slate-900">M</div>
+                    <div>
+                        <p class="text-sm font-bold text-white">Momentum Fit</p>
+                        <p class="text-[10px] uppercase tracking-[0.2em] text-slate-400">Dashboard</p>
                     </div>
                 </div>
 
-                <!-- Workout list will populate here dynamically via JavaScript -->
-                <div id="workout-list" class="space-y-4">
-                    <!-- Sample items matching your screenshot -->
+                <nav class="space-y-1">
+                    <button type="button" data-tab="dashboard" id="nav-dashboard" class="w-full rounded-xl bg-accentgreen px-4 py-2.5 text-left text-sm font-semibold text-slate-900 transition">📊 Dashboard</button>
+                    <button type="button" data-tab="workouts" id="nav-workouts" class="w-full rounded-xl px-4 py-2.5 text-left text-sm text-slate-400 transition hover:bg-slate-800 hover:text-white">🏋️ Workouts</button>
+                    <button type="button" data-tab="nutrition" id="nav-nutrition" class="w-full rounded-xl px-4 py-2.5 text-left text-sm text-slate-400 transition hover:bg-slate-800 hover:text-white">🥗 Nutrition</button>
+                    <button type="button" data-tab="metrics" id="nav-metrics" class="w-full rounded-xl px-4 py-2.5 text-left text-sm text-slate-400 transition hover:bg-slate-800 hover:text-white">📈 Body Metrics</button>
+                </nav>
+            </div>
+
+            <div class="rounded-2xl border border-slate-800 bg-slate-950 p-4">
+                <div class="flex items-center gap-3">
+                    <div id="user-avatar" class="flex h-10 w-10 items-center justify-center rounded-full bg-amber-500 font-bold text-slate-900">U</div>
+                    <div>
+                        <p id="sidebar-user-name" class="text-sm font-semibold text-white">User</p>
+                        <p id="sidebar-user-role" class="text-xs text-slate-400">Member</p>
+                    </div>
+                </div>
+                <button id="logout-button" type="button" class="mt-4 w-full rounded-xl border border-slate-700 px-3 py-2 text-sm text-slate-200 hover:border-slate-500">Logout</button>
+            </div>
+        </aside>
+
+        <main class="flex-1">
+            <header class="flex flex-col gap-4 border-b border-slate-800 bg-slate-900/60 px-6 py-5 md:flex-row md:items-center md:justify-between">
+                <div>
+                    <p class="text-sm uppercase tracking-[0.2em] text-slate-400">Fitness Progress Tracker</p>
+                    <h2 class="text-2xl font-bold text-white">Momentum Fit Studio</h2>
+                </div>
+                <div class="flex items-center gap-3">
+                    <span id="date-label" class="text-sm text-slate-400">Today</span>
+                    <button id="log-workout-button" type="button" class="rounded-xl bg-accentgreen px-4 py-2 text-sm font-semibold text-slate-900 hover:bg-emerald-300">+ Log workout</button>
+                </div>
+            </header>
+
+            <div class="p-6 md:p-8">
+                <div id="tab-dashboard" class="space-y-6">
+                    <div>
+                        <h3 id="welcome-text" class="text-3xl font-bold text-white">Good afternoon</h3>
+                        <p class="text-slate-400">Here is your fitness progress at a glance.</p>
+                    </div>
+
+                    <div class="grid gap-4 md:grid-cols-4">
+                        <div class="rounded-2xl border border-slate-800 bg-slate-900 p-6">
+                            <p class="text-sm text-slate-400">Workouts</p>
+                            <p id="stat-workouts" class="mt-4 text-3xl font-bold text-white">0</p>
+                        </div>
+                        <div class="rounded-2xl border border-slate-800 bg-slate-900 p-6">
+                            <p class="text-sm text-slate-400">Calories burned</p>
+                            <p id="stat-calories" class="mt-4 text-3xl font-bold text-white">0</p>
+                        </div>
+                        <div class="rounded-2xl border border-slate-800 bg-slate-900 p-6">
+                            <p class="text-sm text-slate-400">Avg. duration</p>
+                            <p id="stat-duration" class="mt-4 text-3xl font-bold text-white">0m</p>
+                        </div>
+                        <div class="rounded-2xl border border-slate-800 bg-slate-900 p-6">
+                            <p class="text-sm text-slate-400">Current weight</p>
+                            <p id="stat-weight" class="mt-4 text-3xl font-bold text-white">0kg</p>
+                        </div>
+                    </div>
+
+                    <div class="grid gap-6 md:grid-cols-3">
+                        <div class="rounded-2xl border border-slate-800 bg-slate-900 p-6 md:col-span-2">
+                            <div class="mb-4 flex items-center justify-between">
+                                <h4 class="text-xl font-semibold text-white">Weekly trend</h4>
+                                <span class="text-sm font-medium text-emerald-300">+12.4%</span>
+                            </div>
+                            <div class="space-y-3 text-sm text-slate-300">
+                                <div class="flex justify-between border-b border-slate-800 pb-2"><span>Last workout</span><span id="focus-last-workout">-</span></div>
+                                <div class="flex justify-between border-b border-slate-800 pb-2"><span>Recent calories</span><span id="focus-calories">-</span></div>
+                                <div class="flex justify-between border-b border-slate-800 pb-2"><span>Meals logged</span><span id="focus-meals">-</span></div>
+                                <div class="flex justify-between"><span>Goal progress</span><span id="focus-goal">-</span></div>
+                            </div>
+                        </div>
+                        <div class="rounded-2xl border border-slate-800 bg-slate-900 p-6">
+                            <h4 class="mb-4 text-xl font-semibold text-white">Coach notes</h4>
+                            <ul class="space-y-3 text-sm text-slate-300">
+                                <li>• Keep recovery focused after your last strength session.</li>
+                                <li>• Protein intake looks on target for the week.</li>
+                                <li>• Continue with 2–3 short cardio sessions this week.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="tab-workouts" class="hidden space-y-6">
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <h3 class="text-3xl font-bold text-white">Workouts</h3>
+                            <p class="text-slate-400">Log training sessions and review your full workout history.</p>
+                        </div>
+                        <button id="open-workout-modal" type="button" class="rounded-xl bg-accentgreen px-4 py-2 text-sm font-semibold text-slate-900 hover:bg-emerald-300">+ Add workout</button>
+                    </div>
+                    <div id="workout-list" class="space-y-4"></div>
+                </div>
+
+                <div id="tab-nutrition" class="hidden space-y-6">
+                    <div>
+                        <h3 class="text-3xl font-bold text-white">Nutrition</h3>
+                        <p class="text-slate-400">Track meals by date with calories and macronutrients.</p>
+                    </div>
+                    <div class="rounded-2xl border border-slate-800 bg-slate-900 p-6">
+                        <form id="meal-form" class="grid gap-4 md:grid-cols-6">
+                            <input id="meal-name" type="text" placeholder="Meal" class="md:col-span-2 rounded-xl border border-slate-700 bg-slate-950 px-3 py-2.5 text-white outline-none placeholder:text-slate-500 focus:border-emerald-500" required>
+                            <input id="meal-calories" type="number" min="0" placeholder="Calories" class="rounded-xl border border-slate-700 bg-slate-950 px-3 py-2.5 text-white outline-none placeholder:text-slate-500 focus:border-emerald-500" required>
+                            <input id="meal-protein" type="number" min="0" placeholder="Protein g" class="rounded-xl border border-slate-700 bg-slate-950 px-3 py-2.5 text-white outline-none placeholder:text-slate-500 focus:border-emerald-500" required>
+                            <input id="meal-carbs" type="number" min="0" placeholder="Carbs g" class="rounded-xl border border-slate-700 bg-slate-950 px-3 py-2.5 text-white outline-none placeholder:text-slate-500 focus:border-emerald-500" required>
+                            <input id="meal-fats" type="number" min="0" placeholder="Fats g" class="rounded-xl border border-slate-700 bg-slate-950 px-3 py-2.5 text-white outline-none placeholder:text-slate-500 focus:border-emerald-500" required>
+                            <input id="meal-date" type="date" class="rounded-xl border border-slate-700 bg-slate-950 px-3 py-2.5 text-white outline-none focus:border-emerald-500" required>
+                            <button type="submit" class="md:col-span-6 rounded-xl bg-accentgreen px-4 py-2.5 font-semibold text-slate-900 hover:bg-emerald-300">Save meal</button>
+                        </form>
+                    </div>
+                    <div id="nutrition-list" class="space-y-4"></div>
+                </div>
+
+                <div id="tab-metrics" class="hidden space-y-6">
+                    <div>
+                        <h3 class="text-3xl font-bold text-white">Body Metrics</h3>
+                        <p class="text-slate-400">Track weight, body composition and measurements over time.</p>
+                    </div>
+                    <div class="rounded-2xl border border-slate-800 bg-slate-900 p-6">
+                        <form id="metrics-form" class="grid gap-4 md:grid-cols-5">
+                            <input id="metric-weight" type="number" min="0" step="0.1" placeholder="Weight kg" class="rounded-xl border border-slate-700 bg-slate-950 px-3 py-2.5 text-white outline-none placeholder:text-slate-500 focus:border-emerald-500" required>
+                            <input id="metric-bodyfat" type="number" min="0" step="0.1" placeholder="Body fat %" class="rounded-xl border border-slate-700 bg-slate-950 px-3 py-2.5 text-white outline-none placeholder:text-slate-500 focus:border-emerald-500" required>
+                            <input id="metric-waist" type="number" min="0" step="0.1" placeholder="Waist cm" class="rounded-xl border border-slate-700 bg-slate-950 px-3 py-2.5 text-white outline-none placeholder:text-slate-500 focus:border-emerald-500" required>
+                            <input id="metric-date" type="date" class="rounded-xl border border-slate-700 bg-slate-950 px-3 py-2.5 text-white outline-none focus:border-emerald-500" required>
+                            <button type="submit" class="rounded-xl bg-accentgreen px-4 py-2.5 font-semibold text-slate-900 hover:bg-emerald-300">Save metric</button>
+                        </form>
+                    </div>
+                    <div id="metrics-list" class="space-y-4"></div>
                 </div>
             </div>
+        </main>
+    </div>
 
-            <!-- NUTRITION TAB -->
-            <div id="tab-nutrition" class="hidden space-y-6">
-                <h3 class="text-3xl font-bold">Nutrition</h3>
-                <p class="text-gray-400">Track meals by date with calories and macronutrients.</p>
+    <div id="workout-modal" class="fixed inset-0 z-50 hidden items-center justify-center bg-slate-950/80 px-4">
+        <div class="w-full max-w-lg rounded-3xl border border-slate-800 bg-slate-900 p-6 shadow-2xl">
+            <div class="mb-5 flex items-center justify-between">
+                <h4 id="workout-modal-title" class="text-2xl font-bold text-white">Log workout</h4>
+                <button id="close-workout-modal" type="button" class="text-2xl text-slate-400 hover:text-white">×</button>
             </div>
 
-            <!-- BODY METRICS TAB -->
-            <div id="tab-metrics" class="hidden space-y-6">
-                <h3 class="text-3xl font-bold">Body Metrics</h3>
-                <p class="text-gray-400">Track weight, body composition and measurements over time.</p>
-            </div>
+            <form id="workout-form" class="space-y-4">
+                <div id="workout-user-group" class="hidden">
+                    <label for="workout-user" class="mb-1 block text-sm text-slate-300">Assign to member</label>
+                    <select id="workout-user" class="w-full rounded-xl border border-slate-700 bg-slate-950 px-3 py-2.5 text-white outline-none focus:border-emerald-500"></select>
+                </div>
 
+                <div>
+                    <label for="workout-title" class="mb-1 block text-sm text-slate-300">Workout title</label>
+                    <input id="workout-title" type="text" required class="w-full rounded-xl border border-slate-700 bg-slate-950 px-3 py-2.5 text-white outline-none placeholder:text-slate-500 focus:border-emerald-500" placeholder="Leg day">
+                </div>
+
+                <div class="grid gap-4 md:grid-cols-2">
+                    <div>
+                        <label for="workout-category" class="mb-1 block text-sm text-slate-300">Category</label>
+                        <select id="workout-category" class="w-full rounded-xl border border-slate-700 bg-slate-950 px-3 py-2.5 text-white outline-none focus:border-emerald-500">
+                            <option value="Strength">Strength</option>
+                            <option value="Cardio">Cardio</option>
+                            <option value="Mobility">Mobility</option>
+                            <option value="HIIT">HIIT</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label for="workout-date" class="mb-1 block text-sm text-slate-300">Date</label>
+                        <input id="workout-date" type="date" required class="w-full rounded-xl border border-slate-700 bg-slate-950 px-3 py-2.5 text-white outline-none focus:border-emerald-500">
+                    </div>
+                </div>
+
+                <div class="grid gap-4 md:grid-cols-3">
+                    <div>
+                        <label for="workout-duration" class="mb-1 block text-sm text-slate-300">Minutes</label>
+                        <input id="workout-duration" type="number" min="0" required class="w-full rounded-xl border border-slate-700 bg-slate-950 px-3 py-2.5 text-white outline-none focus:border-emerald-500" placeholder="45">
+                    </div>
+                    <div>
+                        <label for="workout-calories" class="mb-1 block text-sm text-slate-300">Calories</label>
+                        <input id="workout-calories" type="number" min="0" required class="w-full rounded-xl border border-slate-700 bg-slate-950 px-3 py-2.5 text-white outline-none focus:border-emerald-500" placeholder="400">
+                    </div>
+                    <div>
+                        <label for="workout-exercises" class="mb-1 block text-sm text-slate-300">Exercises</label>
+                        <input id="workout-exercises" type="number" min="1" required class="w-full rounded-xl border border-slate-700 bg-slate-950 px-3 py-2.5 text-white outline-none focus:border-emerald-500" placeholder="4">
+                    </div>
+                </div>
+
+                <button type="submit" id="workout-submit-button" class="w-full rounded-xl bg-accentgreen px-4 py-3 font-semibold text-slate-900 hover:bg-emerald-300">Save workout</button>
+            </form>
         </div>
-    </main>
+    </div>
 
     <script src="app.js"></script>
 </body>
